@@ -31,12 +31,12 @@ do
 done
 
 # Install Ansible and Curl so the set up script can execute
-apt install -y ansible curl
+apt install -y ansible curl python3-apt
 
 # Download Files For Kubernetes Installation
 [ -d "${k8sInstallDir}" ] && rm -rf "${k8sInstallDir}"
 mkdir "${k8sInstallDir}"
-for G in master install-kubernetes setup_cluster setup_k8s_master
+for G in master-playbook install-prerequisites install-docker install-kubernetes setup_cluster setup_k8s_master
 do
   curl -s -o "${k8sInstallDir}/${G}.yaml" "${gitRepo}/ansible/${G}.yaml"
 done
@@ -44,7 +44,7 @@ done
 # Instal The Packages For Kubernetes
 currentDir="${PWD}"
 cd "${k8sInstallDir}"
-ansible-playbook master.yaml
+ansible-playbook master-playbook.yaml
 cd "${currentDir}"
 
 # Clean Up Install Files
