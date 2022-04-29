@@ -7,31 +7,31 @@
   tasks:
 
     - name: Untaint All Master Nodes
-      shell: "kubectl taint nodes --all node-role.kubernetes.io/master-"
+      shell: 'kubectl --kubeconfig=/etc/kubernetes/admin.conf taint nodes --all node-role.kubernetes.io/master-'
       args:
         warn: False
 
     - name: Install Tigera Operator For Calico
-      shell: "kubectl apply -k https://docs.projectcalico.org/manifests/tigera-operator.yaml"
+      shell: "kubectl --kubeconfig=/etc/kubernetes/admin.conf apply -k https://docs.projectcalico.org/manifests/tigera-operator.yaml"
       args:
         warn: False
 
     - name: Wait For CNI Operator To Start
-      shell: "kubectl wait pods -n tigera-operator -l k8s-app=tigera-operator --for condition=Ready"
+      shell: "kubectl --kubeconfig=/etc/kubernetes/admin.conf wait pods -n tigera-operator -l k8s-app=tigera-operator --for condition=Ready"
       args:
         warn: False
 
     - name: Apply Calico Configuration
-      shell: "kubectl apply -k https://github.com/geoffh1977/kubernetes-gitops-cluster/kubernetes/manifests/overlays/bootstrap/cni/"
+      shell: "kubectl --kubeconfig=/etc/kubernetes/admin.conf apply -k https://github.com/geoffh1977/kubernetes-gitops-cluster/kubernetes/manifests/overlays/bootstrap/cni/"
       args:
         warn: False
 
     - name: Wait For Calico Node To Start
-      shell: "kubectl wait pods -n calico-system -l k8s-app=calico-node --for condition=Ready"
+      shell: "kubectl --kubeconfig=/etc/kubernetes/admin.conf wait pods -n calico-system -l k8s-app=calico-node --for condition=Ready"
       args:
         warn: False
 
     - name: Apply GitOps Bootstrap Environment
-      shell: "kubectl apply -k https://github.com/geoffh1977/kubernetes-gitops-cluster/kubernetes/manifests/overlays/bootstrap/"
+      shell: "kubectl --kubeconfig=/etc/kubernetes/admin.conf apply -k https://github.com/geoffh1977/kubernetes-gitops-cluster/kubernetes/manifests/overlays/bootstrap/"
       args:
         warn: False

@@ -80,7 +80,7 @@
         state: present
         reload: yes
 
-    - name: Enable IPV6 Bridge Visibility For Kubernetes
+    - name: Enable IPV4 Forwarding
       sysctl:
         name: net.ipv4.ip_forward
         value: '1'
