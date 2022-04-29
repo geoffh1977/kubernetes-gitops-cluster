@@ -1,0 +1,49 @@
+---
+- hosts: localhost
+  connection: local
+  become: true
+  strategy: free
+  vars:
+    packages:
+      - containerd.io
+
+  tasks:
+
+    ### Check Dependencies And Install Software
+    - name: Add Docker Signing Key
+      shell: 'curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg'
+      args:
+        creates: /usr/share/keyrings/docker-archive-keyring.gpg
+        warn: False
+
+    - name: Add Docker Repository
+      apt_repository:
+        repo: 'deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian bullseye stable'
+        filename: docker-archive
+        state: present
+
+    - name: Update The Apt Cache With Shell
+      shell: 'apt-get update'
+      args:
+        warn: False
+
+    - name: Install Application Packages
+      apt:
+        name: "{{ packages }}"
+        state: present
+        force: yes
+
+    ### Copy Configuration And Setup Services
+    - name: Download Containerd Daemon Config
+      get_url:
+        url: https://raw.githubusercontent.com/geoffh1977/kubernetes-gitops-cluster/main/kubernetes/setup/config/config.toml
+        dest: /etc/containerd/config.toml
+        owner: root
+        group: root
+        mode: 0644
+
+    - name: Restart Containerd
+      systemd:
+        name: containerd
+        state: restarted
+        daemon_reload: yes

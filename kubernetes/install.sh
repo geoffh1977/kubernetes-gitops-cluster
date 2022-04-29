@@ -36,7 +36,7 @@ apt install -y ansible curl python3-apt
 # Download Files For Kubernetes Installation
 [ -d "${k8sInstallDir}" ] && rm -rf "${k8sInstallDir}"
 mkdir "${k8sInstallDir}"
-for G in master-playbook install-prerequisites install-docker install-kubernetes setup_cluster setup_k8s_master
+for G in master-playbook install-prerequisites install-docker install-containerd install-kubernetes setup_cluster setup_k8s_master
 do
   curl -s -o "${k8sInstallDir}/${G}.yaml" "${gitRepo}/ansible/${G}.yaml"
 done

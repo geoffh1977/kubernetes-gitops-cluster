@@ -3,7 +3,8 @@
 - import_playbook: install-prerequisites.yaml
 
 # Install Container Layer
-- import_playbook: install-docker.yaml
+# - import_playbook: install-docker.yaml
+- import_playbook: install-containerd.yaml
 
 # Install The Kubernetes Binaries
 - import_playbook: install-kubernetes.yaml
