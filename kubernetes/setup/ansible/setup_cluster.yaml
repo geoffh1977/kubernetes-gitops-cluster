@@ -12,7 +12,7 @@
         warn: False
 
     - name: Install Tigera Operator For Calico
-      shell: "kubectl --kubeconfig=/etc/kubernetes/admin.conf apply -k https://docs.projectcalico.org/manifests/tigera-operator.yaml"
+      shell: "kubectl --kubeconfig=/etc/kubernetes/admin.conf apply -f https://docs.projectcalico.org/manifests/tigera-operator.yaml"
       args:
         warn: False
 
