@@ -59,7 +59,7 @@
         mode: '0640'
     
     ### Copy Admin Connection File To Temp
-    - name: Copy file with owner and permissions
+    - name: Copy File With Owner And Permissions
       copy:
         src: /etc/kubernetes/admin.conf
         dest: /tmp/kube.config
@@ -67,7 +67,6 @@
         group: root
         mode: '0644'
 
-    # Pause
+    # Pause With Shell Command (Pause Module Doesn't Work Here)
     - name: Waiting 60 Seconds To Allow Services To Start
-      pause:
-        seconds: 60
+      shell: 'sleep 60'
