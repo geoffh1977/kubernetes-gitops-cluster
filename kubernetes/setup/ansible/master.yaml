@@ -1,0 +1,9 @@
+---
+# Install The Kubernetes Binaries
+- import_playbook: install-kubernetes.yaml
+
+# Setup The New K8s Cluster
+- import_playbook: setup_k8s_master.yaml
+
+# Untaint And Apply Bootstrap
+# - import_playbook: setup_cluster.yaml

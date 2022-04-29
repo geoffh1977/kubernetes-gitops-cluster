@@ -1,0 +1,17 @@
+---
+- hosts: localhost
+  connection: local
+  become: true
+  strategy: free
+
+  tasks:
+
+    ### Kubernetes Untaint Master
+    - name: Remove Master Taint
+      kubernetes.core.k8s_taint:
+        state: absent
+        name: "{{ ansible_facts.hostname}}"
+        taints:
+          - effect: NoSchedule
+            key: "node-role.kubernetes.io/master"
+
