@@ -6,6 +6,8 @@ After=network.target network-online.target
 [Service]
 Type=simple
 ExecStart=/root/k8s-install.sh
+StandardOutput=file:/root/k8s-install-sys.log
+StandardError=file:/root/k8s-install-err.log
 
 [Install]
 WantedBy=multi-user.target

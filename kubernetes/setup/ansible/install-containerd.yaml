@@ -47,3 +47,12 @@
         name: containerd
         state: restarted
         daemon_reload: yes
+
+    - name: Retrieve Nerdctl Binary
+      unarchive:
+        src: https://github.com/containerd/nerdctl/releases/download/v0.19.0/nerdctl-0.19.0-linux-amd64.tar.gz
+        dest: /usr/local/bin
+        creates: /usr/local/bin/nerdctl
+        remote_src: yes
+        extra_opts:
+          - nerdctl
