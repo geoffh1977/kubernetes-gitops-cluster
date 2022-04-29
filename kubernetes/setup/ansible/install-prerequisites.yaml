@@ -9,6 +9,7 @@
       - gnupg2
       - curl
       - ca-certificates
+      - git
 
   tasks:
 
