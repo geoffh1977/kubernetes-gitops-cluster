@@ -67,35 +67,7 @@
         group: root
         mode: '0644'
 
-    ### Add Cluster Setup Commands
-    # - name: Download Kubernetes Cluster Setup Script
-    #   get_url:
-    #     url: https://raw.githubusercontent.com/geoffh1977/kubernetes-gitops-cluster/main/kubernetes/setup/ansible/setup_cluster.yaml
-    #     dest: /root/k8s-setup/setup_cluster.yaml
-    #     owner: root
-    #     group: root
-    #     mode: 0640
-
-    # - name: Download Kubernetes Single Node Setup Script
-    #   get_url:
-    #     url: https://raw.githubusercontent.com/geoffh1977/kubernetes-gitops-cluster/main/kubernetes/setup/ansible/setup_single.yaml
-    #     dest: /root/k8s-setup/setup_single.yaml
-    #     owner: root
-    #     group: root
-    #     mode: 0640
-
-    # - name: Download Kubernetes Cluster Setup Script
-    #   get_url:
-    #     url: https://raw.githubusercontent.com/geoffh1977/kubernetes-gitops-cluster/main/kubernetes/setup/scripts/setup_cluster.sh
-    #     dest: /root/k8s-setup/setup_cluster.sh
-    #     owner: root
-    #     group: root
-    #     mode: 0755
-
-    # - name: Download Kubernetes Single Setup Script
-    #   get_url:
-    #     url: https://raw.githubusercontent.com/geoffh1977/kubernetes-gitops-cluster/main/kubernetes/setup/scripts/setup_single.sh
-    #     dest: /root/k8s-setup/setup_single.sh
-    #     owner: root
-    #     group: root
-    #     mode: 0755
+    # Pause
+    - name: Waiting 60 Seconds To Allow Services To Start
+      pause:
+        seconds: 60
