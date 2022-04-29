@@ -31,7 +31,7 @@
       shell: 'sleep 10'
 
     - name: Wait For Calico Node To Start
-      shell: "kubectl --kubeconfig=/etc/kubernetes/admin.conf wait pods -n calico-system -l k8s-app=calico-node --for condition=Ready"
+      shell: "kubectl --kubeconfig=/etc/kubernetes/admin.conf wait pods -n calico-system -l k8s-app=calico-node --for condition=Ready --timeout=180s"
       args:
         warn: False
 
@@ -45,7 +45,7 @@
       shell: 'sleep 5'
 
     - name: Wait For Argo CD To Start
-      shell: "kubectl --kubeconfig=/etc/kubernetes/admin.conf wait pods -n argo-cd -l app.kubernetes.io/name=argocd-server --for condition=Ready"
+      shell: "kubectl --kubeconfig=/etc/kubernetes/admin.conf wait pods -n argo-cd -l app.kubernetes.io/name=argocd-server --for condition=Ready --timeout=180s"
       args:
         warn: False
 
