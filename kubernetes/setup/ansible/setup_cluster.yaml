@@ -41,7 +41,7 @@
         warn: False
 
     # Pause With Shell Command (Pause Module Doesn't Work Here)
-    - name: Waiting 5 Seconds To Allow CNI To Be Created
+    - name: Waiting 5 Seconds To Allow Services To Be Created
       shell: 'sleep 5'
 
     - name: Wait For Argo CD To Start
@@ -49,5 +49,6 @@
       args:
         warn: False
 
-    - debug:
+    - name: Finishing Message
+      debug:
         msg: "Cluster Has Been Bootstrapped And Started!"
