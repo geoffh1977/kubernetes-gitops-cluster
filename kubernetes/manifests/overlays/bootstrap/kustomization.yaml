@@ -5,6 +5,7 @@ kind: Kustomization
 bases:
   - ../../bases/calico/
   - ../../bases/argo-cd/
+  - ../../bases/sealed-secrets/
 
 resources:
   - calico/calico-vxlan.yaml
