@@ -1,0 +1,19 @@
+---
+- hosts: localhost
+  connection: local
+  become: true
+  strategy: free
+  vars:
+    dependencies:
+      - apt-transport-https
+      - gnupg2
+      - curl
+      - ca-certificates
+
+  tasks:
+
+    ### Check Dependencies And Install Software
+    - name: Install Required Dependencies
+      apt:
+        name: "{{ dependencies }}"
+        force: yes
