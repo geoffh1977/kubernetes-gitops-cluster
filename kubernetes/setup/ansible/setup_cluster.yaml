@@ -6,12 +6,14 @@
 
   tasks:
 
-    ### Kubernetes Untaint Master
-    - name: Remove Master Taint
-      kubernetes.core.k8s_taint:
-        state: absent
-        name: "{{ ansible_facts.hostname}}"
-        taints:
-          - effect: NoSchedule
-            key: "node-role.kubernetes.io/master"
+    ### Kubernetes Untaint Master(s)
+    - name: Update The Apt Cache With Shell
+      shell: "kubectl taint nodes --all node-role.kubernetes.io/master-"
+      args:
+        warn: False
 
+    ### Activate Bootstrap Environment
+    - name: Update The Apt Cache With Shell
+      shell: "kubectl apply -k https://github.com/geoffh1977/kubernetes-gitops-cluster/kubernetes/manifests/overlays/bootstrap/"
+      args:
+        warn: False
